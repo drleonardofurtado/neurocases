@@ -27,6 +27,9 @@ html, body, [class*="css"] { font-family: 'Lato', sans-serif !important; }
 section[data-testid="stSidebar"] { background-color: #1a1a1a !important; }
 section[data-testid="stSidebar"] * { color: #ffffff !important; }
 section[data-testid="stSidebar"] .stMetric label { color: #aaaaaa !important; }
+/* Dropdowns dentro da sidebar: texto escuro para legibilidade */
+section[data-testid="stSidebar"] .stSelectbox div[data-baseweb="select"] * { color: #1a1a1a !important; }
+section[data-testid="stSidebar"] .stSelectbox span { color: #1a1a1a !important; }
 
 .option-btn { width: 100%; text-align: left; padding: 12px 16px;
     border: 1px solid #e0e0e0; border-radius: 6px; background: white;
