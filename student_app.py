@@ -63,8 +63,20 @@ with st.sidebar:
     total_q = c.fetchone()[0]
     conn.close()
 
-    selected_cat = st.selectbox("Categoria", cats, label_visibility="collapsed")
-    selected_diff = st.selectbox("Dificuldade", ["Todas", "fácil", "médio", "difícil"])
+    selected_cat = st.selectbox("Categoria", cats, key="filter_cat", label_visibility="collapsed")
+    selected_diff = st.selectbox("Dificuldade", ["Todas", "fácil", "médio", "difícil"], key="filter_diff")
+
+    # Detecta mudança de filtro e reseta questão atual
+    prev_cat  = st.session_state.get("_prev_cat", selected_cat)
+    prev_diff = st.session_state.get("_prev_diff", selected_diff)
+    if selected_cat != prev_cat or selected_diff != prev_diff:
+        for k in ["current_q", "selected_option", "answered_current", "load_next"]:
+            st.session_state.pop(k, None)
+        st.session_state["_prev_cat"]  = selected_cat
+        st.session_state["_prev_diff"] = selected_diff
+        st.rerun()
+    st.session_state["_prev_cat"]  = selected_cat
+    st.session_state["_prev_diff"] = selected_diff
 
     st.divider()
     st.metric("Questões disponíveis", total_q)
